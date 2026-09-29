@@ -1,0 +1,9 @@
+.git
+.gitignore
+.env
+.env.*
+node_modules
+npm-debug.log*
+README.md
+Start-MemoryLens.ps1
+Deploy-CloudRun.ps1

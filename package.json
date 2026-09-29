@@ -1,0 +1,14 @@
+{
+  "name": "photo-memory-discovery-engine",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Evidence-backed research workspace for understanding photo retrieval failures.",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test",
+    "deploy:gcp": "gcloud run deploy memory-lens --source . --region us-central1 --allow-unauthenticated"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

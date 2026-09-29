@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI-powered photo retrieval research workspace" />
+    <title>Memory Lens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="Memory Lens home">
+          <span class="brand-mark"><i></i><i></i><i></i><i></i></span>
+          <span>Memory Lens</span>
+        </a>
+        <nav aria-label="Primary navigation">
+          <button class="nav-item active" data-view="overview"><span>◫</span>Overview</button>
+          <button class="nav-item" data-view="evidence"><span>◉</span>Evidence explorer</button>
+          <button class="nav-item" data-view="opportunities"><span>◇</span>Opportunities</button>
+          <button class="nav-item" data-view="pipeline"><span>⌁</span>AI pipeline</button>
+        </nav>
+        <div class="sidebar-note">
+          <span class="pulse"></span>
+          <div><strong>Research workspace</strong><small>Public feedback only</small></div>
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">PHOTO RETRIEVAL RESEARCH</p>
+            <h1 id="page-title">What people remember</h1>
+          </div>
+          <div class="header-actions">
+            <button class="secondary" id="export-button">Export brief</button>
+            <button class="primary" id="add-button">＋ Add evidence</button>
+          </div>
+        </header>
+
+        <section class="view active" id="overview-view">
+          <div class="hero">
+            <div>
+              <span class="status-chip">Demo synthesis · 8 sample conversations</span>
+              <h2>People remember the <em>story</em>,<br />not the metadata.</h2>
+              <p>Users recall a fuzzy mix of people, objects, emotions, and situations—but search asks them for dates, places, or exact nouns.</p>
+            </div>
+            <div class="hero-orbit" aria-label="Memory cue illustration">
+              <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+              <span class="memory-dot people">People</span>
+              <span class="memory-dot feeling">Feeling</span>
+              <span class="memory-dot object">Object</span>
+              <span class="memory-dot moment">Moment</span>
+              <div class="core">?</div>
+            </div>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric"><span class="metric-icon lavender">⌁</span><div><small>Incomplete-memory searches</small><strong>88%</strong><p>include 2+ forgotten details</p></div></article>
+            <article class="metric"><span class="metric-icon coral">↯</span><div><small>Most common breakdown</small><strong>Vocabulary gap</strong><p>“I know it when I see it”</p></div></article>
+            <article class="metric"><span class="metric-icon mint">◎</span><div><small>Strongest remembered cue</small><strong>Life context</strong><p>event, companion, or purpose</p></div></article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel cue-panel">
+              <div class="panel-head"><div><p class="eyebrow">MEMORY CUES</p><h3>What users still remember</h3></div><button class="text-button" data-target="evidence">View evidence →</button></div>
+              <div id="cue-chart" class="bar-chart"></div>
+            </article>
+            <article class="panel quote-panel">
+              <div class="panel-head"><div><p class="eyebrow">SIGNAL OF THE WEEK</p><h3>Recognition beats recall</h3></div><span class="quote-mark">“</span></div>
+              <blockquote>I couldn't name the restaurant or the year. I just remembered we were outside, the tables were blue, and my daughter had that yellow raincoat.</blockquote>
+              <div class="source-row"><span class="source-icon reddit">r/</span><div><strong>Reddit discussion</strong><small>Travel photo retrieval · High confidence</small></div></div>
+              <div class="tags"><span>visual cue</span><span>person</span><span>uncertain time</span></div>
+            </article>
+          </div>
+
+          <article class="panel opportunity-preview">
+            <div class="panel-head"><div><p class="eyebrow">OPPORTUNITY MAP</p><h3>Where retrieval breaks down</h3></div><button class="text-button" data-target="opportunities">Compare all →</button></div>
+            <div id="opportunity-cards" class="opportunity-cards"></div>
+          </article>
+        </section>
+
+        <section class="view" id="evidence-view">
+          <div class="section-intro"><div><h2>Evidence explorer</h2><p>Trace every insight back to the user language that supports it.</p></div><div class="search-wrap"><span>⌕</span><input id="evidence-search" type="search" placeholder="Search quotes, cues, or problems…" /></div></div>
+          <form class="research-run panel" id="research-form">
+            <div class="run-heading">
+              <span class="metric-icon lavender">✦</span>
+              <div><p class="eyebrow">AUTOMATED RESEARCH RUN</p><h3>Collect and synthesize public feedback</h3></div>
+            </div>
+            <label>Research topic<input id="research-query" value="finding an old photo with incomplete memory" required /></label>
+            <label>Comment week<input id="research-week" type="week" required /></label>
+            <button class="primary" id="run-research" type="submit">Run AI research</button>
+            <p class="run-note">Uses public connectors and reports unavailable platforms instead of silently omitting them.</p>
+          </form>
+          <div class="connector-status" id="connector-status" hidden></div>
+          <article class="ai-summary panel" id="ai-summary" hidden></article>
+          <div class="filter-toolbar">
+            <div class="filter-row" id="filters"></div>
+            <div class="week-filter">
+              <label for="week-input">Comment week</label>
+              <input id="week-input" type="week" aria-label="Filter comments by week" />
+              <button id="clear-week" class="text-button" type="button" hidden>Clear</button>
+            </div>
+          </div>
+          <div class="evidence-layout">
+            <div id="evidence-list" class="evidence-list"></div>
+            <aside class="insight-rail panel">
+              <p class="eyebrow">LIVE SYNTHESIS</p><h3 id="result-count">0 signals</h3>
+              <div id="live-stats"></div>
+              <p class="method-note">Counts reflect the currently filtered evidence set, so patterns can be compared without losing source context.</p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="opportunities-view">
+          <div class="section-intro"><div><h2>Opportunity prioritization</h2><p>Compare retrieval problems by prevalence, severity, and confidence—not sentiment alone.</p></div><button class="secondary" id="scoring-info">How scoring works</button></div>
+          <div class="matrix-wrap panel">
+            <div class="matrix-label y-label">User pain →</div>
+            <div class="matrix">
+              <div class="quadrant top-left"><span>Explore</span></div><div class="quadrant top-right"><span>Prioritize</span></div>
+              <div class="quadrant bottom-left"><span>Monitor</span></div><div class="quadrant bottom-right"><span>Quick wins</span></div>
+              <div id="matrix-points"></div>
+            </div>
+            <div class="matrix-label x-label">Evidence prevalence →</div>
+          </div>
+          <div class="opportunity-table panel">
+            <div class="table-row table-head"><span>Opportunity</span><span>Evidence</span><span>Pain</span><span>Confidence</span><span>Score</span></div>
+            <div id="opportunity-table-body"></div>
+          </div>
+        </section>
+
+        <section class="view" id="pipeline-view">
+          <div class="section-intro"><div><h2>AI research pipeline</h2><p>Turn unstructured public conversations into auditable retrieval insights.</p></div></div>
+          <div class="pipeline">
+            <article class="pipeline-step"><b>01</b><span>Collect</span><p>Import public reviews, discussions, comments, and forum posts with source links.</p></article>
+            <i>→</i><article class="pipeline-step"><b>02</b><span>Extract</span><p>AI labels remembered cues, forgotten details, search phrasing, and failure modes.</p></article>
+            <i>→</i><article class="pipeline-step"><b>03</b><span>Cluster</span><p>Group semantically similar retrieval struggles while retaining verbatim evidence.</p></article>
+            <i>→</i><article class="pipeline-step"><b>04</b><span>Prioritize</span><p>Compare opportunities using prevalence, pain, and evidence confidence.</p></article>
+          </div>
+          <article class="panel schema-panel">
+            <div><p class="eyebrow">STRUCTURED OUTPUT</p><h3>One research record, many ways to compare</h3><p>The extraction schema is designed around memory behavior rather than generic sentiment.</p></div>
+            <pre><code>{
+  "remembered_cues": ["visual", "person", "context"],
+  "forgotten_details": ["date", "place name"],
+  "query_pattern": "descriptive + uncertain time",
+  "failure_mode": "vocabulary gap",
+  "retrieval_intent": "travel memory",
+  "severity": 4,
+  "confidence": 0.91
+}</code></pre>
+          </article>
+          <article class="panel connector-panel">
+            <div><p class="eyebrow">PLATFORM COVERAGE</p><h3>Connectors respect source access</h3><p>Reddit and App Store use public endpoints. YouTube uses the official Data API. Google support, Play Store, social posts, and forums use date-bounded web search.</p></div>
+            <div class="credential-list">
+              <span><b>OPENAI_API_KEY</b> Required for AI coding and synthesis</span>
+              <span><b>YOUTUBE_API_KEY</b> Enables YouTube comments</span>
+              <span><b>SERPER_API_KEY</b> Enables support, Play Store, social, and forum discovery</span>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="modal" hidden>
+      <form class="modal" id="evidence-form">
+        <div class="modal-head"><div><p class="eyebrow">NEW RESEARCH INPUT</p><h2>Add evidence</h2></div><button type="button" class="icon-button" id="close-modal">×</button></div>
+        <label>Source<select id="source-input"><option>Reddit</option><option>Play Store</option><option>App Store</option><option>Google Photos Community</option><option>YouTube</option><option>Forum</option></select></label>
+        <label>Comment date<input id="date-input" type="date" required /></label>
+        <label>User quote<textarea id="quote-input" rows="5" required placeholder="Paste a public comment about trying to find an old photo…"></textarea></label>
+        <label>Source URL<input id="url-input" type="url" placeholder="https://…" /></label>
+        <div class="modal-actions"><span id="ai-status">AI will extract retrieval signals</span><button class="primary" type="submit">Analyze evidence</button></div>
+      </form>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
